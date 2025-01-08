@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		2C9C973D2D2E41750016C0E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C9C971E2D2E41710016C0E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C9C97252D2E41720016C0E9;
+			remoteInfo = flashback;
+		};
+		2C9C97472D2E41750016C0E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C9C971E2D2E41710016C0E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C9C97252D2E41720016C0E9;
+			remoteInfo = flashback;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C9C97262D2E41720016C0E9 /* flashback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashback.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C9C973C2D2E41750016C0E9 /* flashbackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = flashbackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C9C97462D2E41750016C0E9 /* flashbackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = flashbackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2C9C974E2D2E41750016C0E9 /* Exceptions for "flashback" folder in "flashback" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				images/image1.jpg,
+				images/image2.jpeg,
+				images/image3.jpeg,
+				images/image4.jpg,
+				images/image5.jpeg,
+				images/image6.jpeg,
+				images/image7.jpeg,
+				images/image8.jpeg,
+				Info.plist,
+			);
+			target = 2C9C97252D2E41720016C0E9 /* flashback */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2C9C97282D2E41720016C0E9 /* flashback */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2C9C974E2D2E41750016C0E9 /* Exceptions for "flashback" folder in "flashback" target */,
+			);
+			path = flashback;
+			sourceTree = "<group>";
+		};
+		2C9C973F2D2E41750016C0E9 /* flashbackTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = flashbackTests;
+			sourceTree = "<group>";
+		};
+		2C9C97492D2E41750016C0E9 /* flashbackUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = flashbackUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C9C97232D2E41720016C0E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C97392D2E41750016C0E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C97432D2E41750016C0E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C9C971D2D2E41710016C0E9 = {
+			isa = PBXGroup;
+			children = (
+				2C9C97282D2E41720016C0E9 /* flashback */,
+				2C9C973F2D2E41750016C0E9 /* flashbackTests */,
+				2C9C97492D2E41750016C0E9 /* flashbackUITests */,
+				2C9C97272D2E41720016C0E9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2C9C97272D2E41720016C0E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C9C97262D2E41720016C0E9 /* flashback.app */,
+				2C9C973C2D2E41750016C0E9 /* flashbackTests.xctest */,
+				2C9C97462D2E41750016C0E9 /* flashbackUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2C9C97252D2E41720016C0E9 /* flashback */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C9C974F2D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashback" */;
+			buildPhases = (
+				2C9C97222D2E41720016C0E9 /* Sources */,
+				2C9C97232D2E41720016C0E9 /* Frameworks */,
+				2C9C97242D2E41720016C0E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2C9C97282D2E41720016C0E9 /* flashback */,
+			);
+			name = flashback;
+			packageProductDependencies = (
+			);
+			productName = flashback;
+			productReference = 2C9C97262D2E41720016C0E9 /* flashback.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C9C973B2D2E41750016C0E9 /* flashbackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C9C97542D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashbackTests" */;
+			buildPhases = (
+				2C9C97382D2E41750016C0E9 /* Sources */,
+				2C9C97392D2E41750016C0E9 /* Frameworks */,
+				2C9C973A2D2E41750016C0E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C9C973E2D2E41750016C0E9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2C9C973F2D2E41750016C0E9 /* flashbackTests */,
+			);
+			name = flashbackTests;
+			packageProductDependencies = (
+			);
+			productName = flashbackTests;
+			productReference = 2C9C973C2D2E41750016C0E9 /* flashbackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2C9C97452D2E41750016C0E9 /* flashbackUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C9C97572D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashbackUITests" */;
+			buildPhases = (
+				2C9C97422D2E41750016C0E9 /* Sources */,
+				2C9C97432D2E41750016C0E9 /* Frameworks */,
+				2C9C97442D2E41750016C0E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C9C97482D2E41750016C0E9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2C9C97492D2E41750016C0E9 /* flashbackUITests */,
+			);
+			name = flashbackUITests;
+			packageProductDependencies = (
+			);
+			productName = flashbackUITests;
+			productReference = 2C9C97462D2E41750016C0E9 /* flashbackUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2C9C971E2D2E41710016C0E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					2C9C97252D2E41720016C0E9 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					2C9C973B2D2E41750016C0E9 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 2C9C97252D2E41720016C0E9;
+					};
+					2C9C97452D2E41750016C0E9 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 2C9C97252D2E41720016C0E9;
+					};
+				};
+			};
+			buildConfigurationList = 2C9C97212D2E41710016C0E9 /* Build configuration list for PBXProject "flashback" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2C9C971D2D2E41710016C0E9;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2C9C97272D2E41720016C0E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2C9C97252D2E41720016C0E9 /* flashback */,
+				2C9C973B2D2E41750016C0E9 /* flashbackTests */,
+				2C9C97452D2E41750016C0E9 /* flashbackUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C9C97242D2E41720016C0E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C973A2D2E41750016C0E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C97442D2E41750016C0E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C9C97222D2E41720016C0E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C97382D2E41750016C0E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C9C97422D2E41750016C0E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C9C973E2D2E41750016C0E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C9C97252D2E41720016C0E9 /* flashback */;
+			targetProxy = 2C9C973D2D2E41750016C0E9 /* PBXContainerItemProxy */;
+		};
+		2C9C97482D2E41750016C0E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C9C97252D2E41720016C0E9 /* flashback */;
+			targetProxy = 2C9C97472D2E41750016C0E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2C9C97502D2E41750016C0E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = flashback/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashback;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C9C97512D2E41750016C0E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = flashback/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashback;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2C9C97522D2E41750016C0E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2C9C97532D2E41750016C0E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2C9C97552D2E41750016C0E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashbackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flashback.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flashback";
+			};
+			name = Debug;
+		};
+		2C9C97562D2E41750016C0E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashbackTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flashback.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flashback";
+			};
+			name = Release;
+		};
+		2C9C97582D2E41750016C0E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashbackUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = flashback;
+			};
+			name = Debug;
+		};
+		2C9C97592D2E41750016C0E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.inoue.pudding.flashbackUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = flashback;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C9C97212D2E41710016C0E9 /* Build configuration list for PBXProject "flashback" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C9C97522D2E41750016C0E9 /* Debug */,
+				2C9C97532D2E41750016C0E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C9C974F2D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashback" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C9C97502D2E41750016C0E9 /* Debug */,
+				2C9C97512D2E41750016C0E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C9C97542D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashbackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C9C97552D2E41750016C0E9 /* Debug */,
+				2C9C97562D2E41750016C0E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C9C97572D2E41750016C0E9 /* Build configuration list for PBXNativeTarget "flashbackUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C9C97582D2E41750016C0E9 /* Debug */,
+				2C9C97592D2E41750016C0E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2C9C971E2D2E41710016C0E9 /* Project object */;
+}
