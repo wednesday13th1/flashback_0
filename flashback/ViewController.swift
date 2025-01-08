@@ -11,7 +11,7 @@ import PhotosUI
 class ViewController: UIViewController, PHPickerViewControllerDelegate {
     
     
-    
+    //
     @IBOutlet var collectionView: UICollectionView!
     @IBAction func addphoto() {
         var configuration = PHPickerConfiguration()
