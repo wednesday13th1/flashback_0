@@ -41,6 +41,7 @@
 				images/image6.jpeg,
 				images/image7.jpeg,
 				images/image8.jpeg,
+				"images/lightning-removebg-preview.jpg",
 				Info.plist,
 			);
 			target = 2C9C97252D2E41720016C0E9 /* flashback */;
