@@ -9,8 +9,6 @@ import UIKit
 import PhotosUI
 
 class ViewController: UIViewController, PHPickerViewControllerDelegate {
-    
-    
     //
     @IBOutlet var collectionView: UICollectionView!
     let addButton = UIButton()
