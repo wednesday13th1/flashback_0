@@ -21,6 +21,43 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
     var timer: Timer?
     var saveData: UserDefaults = UserDefaults.standard
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        displayedPhotoDataArray = pickRandomImages()
+        
+        // レイアウトを設定
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let spacing: CGFloat = 10
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = (screenWidth - (spacing * 3)) / 2 // 2列にする計算
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        
+        // コレクションビューを初期化
+        let screenHeight = UIScreen.main.bounds.height
+        let frame = CGRect(x: 0, y: screenHeight/2 - itemWidth/2, width: screenWidth, height: itemWidth)
+        
+        collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
+        collectionView.backgroundColor = .white
+        
+        self.view.addSubview(collectionView)
+        
+        addButton.setTitle("写真を追加する", for: .normal)
+        addButton.setTitleColor(.systemBlue, for: .normal)
+        addButton.setTitleColor(.systemGreen, for: .selected)
+        addButton.frame = CGRect(x:0, y:100, width: 370, height: 30)
+        addButton.addTarget(self, action: #selector(ViewController.addphoto), for: .touchUpInside)
+        self.view.addSubview(addButton)
+        // Timerのセットアップ
+        startImageAnimation()
+    }
+    
     @IBAction func addphoto() {
         var configuration = PHPickerConfiguration()
         
@@ -55,119 +92,74 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
             }
             dismiss(animated: true)
         }
-        
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            displayedPhotoDataArray = pickRandomImages()
-            
-            // レイアウトを設定
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .vertical
-            let spacing: CGFloat = 10
-            let screenWidth = UIScreen.main.bounds.width
-            let itemWidth = (screenWidth - (spacing * 3)) / 2 // 2列にする計算
-            layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-            layout.minimumLineSpacing = spacing
-            layout.minimumInteritemSpacing = spacing
-            
-            // コレクションビューを初期化
-            let screenHeight = UIScreen.main.bounds.height
-            let frame = CGRect(x: 0, y: screenHeight/2 - itemWidth/2, width: screenWidth, height: itemWidth)
-            
-            collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
-            collectionView.backgroundColor = .white
-            
-            self.view.addSubview(collectionView)
-            
-            addButton.setTitle("写真を追加する", for: .normal)
-            addButton.setTitleColor(.systemBlue, for: .normal)
-            addButton.setTitleColor(.systemGreen, for: .selected)
-            addButton.frame = CGRect(x:0, y:100, width: 370, height: 30)
-            addButton.addTarget(self, action: #selector(ViewController.addphoto), for: .touchUpInside)
-            
-            self.view.addSubview(addButton)
-            // Timerのセットアップ
-            startImageAnimation()
-        }
-        @objc func addphoto () {
-            var configuration = PHPickerConfiguration()
-            let filter = PHPickerFilter.images
-            configuration.filter = filter
-            let picker = PHPickerViewController(configuration: configuration)
-            picker.delegate = self
-            
-            present(picker, animated: true)
-        }
-        
-        deinit {
-            // Timerを解放
-            timer?.invalidate()
-        }
-        
-        func startImageAnimation() {
-            timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-                self?.updateDisplayedImages()
-            }
-        }
-        
-        func pickRandomImages() -> [String] {
-            // 全ての画像からランダムに2つ選択
-            return Array(allImageNames.shuffled().prefix(2))
-        }
-        
-        func updateDisplayedImages() {
-            // 新しい画像をランダムに選び、コレクションビューを更新
-            displayedImageNames = pickRandomImages()
-            collectionView.reloadData()
+    }
+    
+    
+    deinit {
+        // Timerを解放
+        timer?.invalidate()
+    }
+    
+    func startImageAnimation() {
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+            self?.updateDisplayedImages()
         }
     }
     
-    // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
-    extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return displayedImageNames.count
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-            cell.configure(with: displayedImageNames[indexPath.item])
-            return cell
-        }
+    func pickRandomImages() -> [NSData] {
+        // 全ての画像からランダムに2つ選択
+        return Array(photoDataArray.shuffled().prefix(2))
     }
     
-    // MARK: - カスタムセル
-    class ImageCell: UICollectionViewCell {
-        private let imageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            return imageView
-        }()
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            contentView.addSubview(imageView)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-                imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-            ])
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
-        func configure(with imageName: String) {
-            imageView.image = UIImage(named: imageName)
-        }
+    func updateDisplayedImages() {
+        // 新しい画像をランダムに選び、コレクションビューを更新
+        displayedPhotoDataArray = pickRandomImages()
+        collectionView.reloadData()
     }
-    
 }
+
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedPhotoDataArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+        cell.configure(with: displayedPhotoDataArray[indexPath.item])
+        return cell
+    }
+}
+
+// MARK: - カスタムセル
+class ImageCell: UICollectionViewCell {
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with displayedPhotoData: NSData) {
+        imageView.image = UIImage(data: displayedPhotoData as Data)
+    }
+}
+
+
