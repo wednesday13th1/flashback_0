@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import PhotosUI
+
+
 
 class ViewController: UIViewController, PHPickerViewControllerDelegate {
     //
@@ -46,52 +47,9 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
         
         self.view.addSubview(collectionView)
         
-        addButton.setTitle("写真を追加する", for: .normal)
-        addButton.setTitleColor(.systemBlue, for: .normal)
-        addButton.setTitleColor(.systemGreen, for: .selected)
-        addButton.frame = CGRect(x:0, y:100, width: 370, height: 30)
-        addButton.addTarget(self, action: #selector(ViewController.addphoto), for: .touchUpInside)
-        self.view.addSubview(addButton)
         // Timerのセットアップ
         startImageAnimation()
     }
-    
-    @IBAction func addphoto() {
-        var configuration = PHPickerConfiguration()
-        
-        let filter = PHPickerFilter.images
-        configuration.filter = filter
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        
-        present(picker, animated: true)
-    }
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        let itemProvider = results.first?.itemProvider
-        
-        if let itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                if let error = error {
-                    print("画像習得に失敗しました", error)
-                    return
-                    
-                }
-                DispatchQueue.main.async {
-                    
-                    guard let selectedImage = image as? UIImage else { return }
-                    let data = selectedImage.pngData() as NSData?
-                    if let imageData = data{
-                        self.photoDataArray.append(imageData)
-                        self.saveData.setValue(self.photoDataArray, forKey: "image")
-                        self.saveData.synchronize()
-                        //self.collectionView.image = image as? UIImage
-                    }
-                }
-            }
-            dismiss(animated: true)
-        }
-    }
-    
     
     deinit {
         // Timerを解放
