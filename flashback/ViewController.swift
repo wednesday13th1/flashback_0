@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import PhotosUI
 
 
 class ViewController: UIViewController, PHPickerViewControllerDelegate {
@@ -59,7 +59,7 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
         }
     }
     
-    func pickRandomImages() -> [Story] {
+    func pickRandomStories() -> [Story] {
         // 全ての画像からランダムに2つ選択
         guard let savedData = saveData(forKey: "stories") else { return [] }
         do {
