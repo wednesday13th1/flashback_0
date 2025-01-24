@@ -9,8 +9,7 @@ import UIKit
 import PhotosUI
 
 
-class ViewController: UIViewController, PHPickerViewControllerDelegate {
-    //
+class ViewController: UIViewController {
     
     var collectionView: UICollectionView
     var displayedStories: [Story] = []
