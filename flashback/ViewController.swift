@@ -11,19 +11,16 @@ import UIKit
 
 class ViewController: UIViewController, PHPickerViewControllerDelegate {
     //
-    @IBOutlet var collectionView: UICollectionView!
-    let addButton = UIButton()
-    // let allImageNames = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8"] // 8個の画像
-    // var displayedImageNames: [String] = [] // 表示中の2つの画像を格納
-    var photoDataArray: [NSData] = []
-    var displayedPhotoDataArray: [NSData] = []
+    
+    var collectionView: UICollectionView
+    var displayedStories: [Story] = []
     var timer: Timer?
     var saveData: UserDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayedPhotoDataArray = pickRandomImages()
+        displayedStories = pickRandomStories()
         
         // レイアウトを設定
         let layout = UICollectionViewFlowLayout()
@@ -62,14 +59,23 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
         }
     }
     
-    func pickRandomImages() -> [NSData] {
+    func pickRandomImages() -> [Story] {
         // 全ての画像からランダムに2つ選択
-        return Array(photoDataArray.shuffled().prefix(2))
+        guard let savedData = saveData(forKey: "stories") else { return [] }
+        do {
+            let decoder = JSONDecoder()
+            let stories = try decoder.decode([Story].self, from: savedData)
+            return Array(stories.shuffled().prefix(2))
+        } catch {
+            print("デコードに失敗しました")
+            return []
+        }
+       
     }
     
     func updateDisplayedImages() {
         // 新しい画像をランダムに選び、コレクションビューを更新
-        displayedPhotoDataArray = pickRandomImages()
+        displayedStories = pickRandomStories()
         collectionView.reloadData()
     }
 }
@@ -78,12 +84,12 @@ class ViewController: UIViewController, PHPickerViewControllerDelegate {
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return displayedPhotoDataArray.count
+        return displayedStories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-        cell.configure(with: displayedPhotoDataArray[indexPath.item])
+        cell.configure(with: displayedStories[indexPath.item])
         return cell
     }
 }
@@ -113,8 +119,8 @@ class ImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with displayedPhotoData: NSData) {
-        imageView.image = UIImage(data: displayedPhotoData as Data)
+    func configure(with story: Story) {
+        imageView.image = UIImage(data: story.imageData)
     }
 }
 

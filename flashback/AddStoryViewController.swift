@@ -8,14 +8,20 @@
 import UIKit
 import PhotosUI
 
+struct Story: Codable{
+    let text: String
+    let imageData: Data
+}
+
 class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
     
     let addPhotoButton = UIButton()
+    var stories: [Story] = []
     let saveButton = UIButton()
     let textview = UITextView()
-    var photoDataArray: [NSData] = []
+    var selectedImageData: Data?
     var saveData: UserDefaults = UserDefaults.standard
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,38 +61,66 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
     
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        let itemProvider = results.first?.itemProvider
+        guard let itemProvider = results.first?.itemProvider else {
+            dismiss(animated: true)
+            return
+        }
         
-        if let itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                guard let self = self else { return }
+                
                 if let error = error {
                     print("画像習得に失敗しました", error)
                     return
                     
                 }
                 DispatchQueue.main.async {
-                    
-                    guard let selectedImage = image as? UIImage else { return }
-                    let data = selectedImage.pngData() as NSData?
-                    if let imageData = data{
-                        self.photoDataArray.append(imageData)
-                        self.saveData.setValue(self.photoDataArray, forKey: "image")
-                        self.saveData.synchronize()
-                        //self.collectionView.image = image as? UIImage
+                    if let selectedImage = image as? UIImage, let imageData = selectedImage.pngData(){
+                        self.selectedImageData = imageData
+                        print("画像が選択されました")
                     }
                 }
             }
-            dismiss(animated: true)
         }
+        dismiss(animated: true)
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    @objc func saveStory() {
+        guard let text = textview.text, !text.isEmpty else {
+            print("テキストが入力されていません")
+            return
+        }
+        
+        
+        guard let imageData = selectedImageData else {
+            print("画像が選択されていません。")
+            return
+        }
+        let newStory = Story(text: text, imageData: imageData)
+        stories.append(newStory)
+        
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(stories)
+            saveData.set(data, forKey: "stories")
+            saveData.synchronize()
+            print("ストーリーが保存されました。")
+        } catch {
+            print("ストーリーの保存に失敗しました。", error)
+        }
+        
+        textview.text = ""
+        selectedImageData = nil
     }
-    */
-
 }
+
+
