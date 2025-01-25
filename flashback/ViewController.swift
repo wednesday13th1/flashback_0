@@ -9,9 +9,10 @@ import UIKit
 import PhotosUI
 
 
+
 class ViewController: UIViewController {
     
-    var collectionView: UICollectionView
+    var collectionView: UICollectionView!
     var displayedStories: [Story] = []
     var timer: Timer?
     var saveData: UserDefaults = UserDefaults.standard
@@ -60,7 +61,7 @@ class ViewController: UIViewController {
     
     func pickRandomStories() -> [Story] {
         // 全ての画像からランダムに2つ選択
-        guard let savedData = saveData(forKey: "stories") else { return [] }
+        guard let savedData = saveData.data(forKey: "stories") else { return [] }
         do {
             let decoder = JSONDecoder()
             let stories = try decoder.decode([Story].self, from: savedData)
@@ -91,6 +92,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.configure(with: displayedStories[indexPath.item])
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.story = displayedStories[indexPath.item]
+        present(detailVC, animated: true)
+    }
 }
 
 // MARK: - カスタムセル
@@ -101,16 +107,30 @@ class ImageCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
+    private let textLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.numberOfLines = 2
+        return label
+    } ()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        contentView.addSubview(textLabel)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
+            textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -120,6 +140,7 @@ class ImageCell: UICollectionViewCell {
     
     func configure(with story: Story) {
         imageView.image = UIImage(data: story.imageData)
+        textLabel.text = story.text
     }
 }
 

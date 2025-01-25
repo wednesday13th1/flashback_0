@@ -24,6 +24,21 @@
             </objects>
             <point key="canvasLocation" x="1872.5190839694656" y="1.4084507042253522"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="VLP-mM-vQy">
+            <objects>
+                <viewController id="boZ-XP-Wxo" customClass="DetailViewController" customModule="flashback" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ISC-af-LmJ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7S8-DX-zWS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yiq-hH-YY7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1906" y="765"/>
+        </scene>
         <!--Item-->
         <scene sceneID="bWr-Uz-jgt">
             <objects>
@@ -46,6 +61,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tdr-ag-UUH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vSE-17-OWD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
