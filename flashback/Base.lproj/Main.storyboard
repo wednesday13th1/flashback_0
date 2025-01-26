@@ -25,19 +25,19 @@
             <point key="canvasLocation" x="1872.5190839694656" y="1.4084507042253522"/>
         </scene>
         <!--Detail View Controller-->
-        <scene sceneID="VLP-mM-vQy">
+        <scene sceneID="uF1-p9-bAa">
             <objects>
-                <viewController id="boZ-XP-Wxo" customClass="DetailViewController" customModule="flashback" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ISC-af-LmJ">
+                <viewController id="T2v-nP-7EL" customClass="DetailViewController" customModule="flashback" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9tf-9O-agk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="7S8-DX-zWS"/>
+                        <viewLayoutGuide key="safeArea" id="RGQ-eq-vFD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yiq-hH-YY7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JO8-bi-m5v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="765"/>
+            <point key="canvasLocation" x="1882" y="726"/>
         </scene>
         <!--Item-->
         <scene sceneID="bWr-Uz-jgt">
@@ -54,6 +54,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNh-83-Zgc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2763" y="15"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="19r-W3-jzI">
+            <objects>
+                <viewController id="0Kb-4i-Pem" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8iU-J9-R7c">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="flashback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U13-AW-NOh">
+                                <rect key="frame" x="133" y="474" width="126" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="lightning-removebg-preview.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hGk-jw-TH7">
+                                <rect key="frame" x="77" y="225" width="239" height="241"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SFb-kz-vqc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oaN-3h-VQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-22.137404580152669" y="36.619718309859159"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kAE-fq-u98">
@@ -76,6 +104,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="lightning-removebg-preview.jpg" width="500" height="500"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

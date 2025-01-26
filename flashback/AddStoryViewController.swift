@@ -19,6 +19,7 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
     var stories: [Story] = []
     let saveButton = UIButton()
     let textview = UITextView()
+    let imageView = UIImageView()
     var selectedImageData: Data?
     var saveData: UserDefaults = UserDefaults.standard
     
@@ -28,12 +29,18 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         addPhotoButton.setTitle("写真を追加する", for: .normal)
         addPhotoButton.setTitleColor(.systemBlue, for: .normal)
         addPhotoButton.setTitleColor(.systemGreen, for: .selected)
-        addPhotoButton.frame = CGRect(x:0, y:100, width: 370, height: 30)
+        addPhotoButton.frame = CGRect(x:20, y:100, width: 200, height: 40)
         addPhotoButton.addTarget(self, action: #selector(AddStoryViewController.addphoto), for: .touchUpInside)
         self.view.addSubview(addPhotoButton)
         // Do any additional setup after loading the view.
         
-        textview.frame = CGRect(x: 20, y: 160, width: view.frame.width - 40, height: 100)
+        imageView.frame = CGRect(x: 20, y:160, width: view.frame.width - 40, height: 200)
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .lightGray
+        view.addSubview(imageView)
+        
+        
+        textview.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 100)
         textview.layer.borderColor = UIColor.gray.cgColor
         textview.layer.borderWidth = 1.0
         textview.layer.cornerRadius = 8.0
@@ -44,7 +51,7 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .systemBlue
         saveButton.layer.cornerRadius = 8.0
-        saveButton.frame = CGRect(x: 20, y: 280, width: view.frame.width - 40, height: 50)
+        saveButton.frame = CGRect(x: 20, y:500, width: view.frame.width - 40, height: 50)
         saveButton.addTarget(self, action: #selector(saveStory), for: .touchUpInside)
         view.addSubview(saveButton)
     }
@@ -78,6 +85,7 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     if let selectedImage = image as? UIImage, let imageData = selectedImage.pngData(){
                         self.selectedImageData = imageData
+                        self.imageView.image = selectedImage
                         print("画像が選択されました")
                     }
                 }
@@ -119,6 +127,7 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         }
         
         textview.text = ""
+        imageView.image = nil
         selectedImageData = nil
     }
 }
