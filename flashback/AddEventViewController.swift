@@ -1,4 +1,12 @@
 //
+//  AddEventViewController.swift
+//  flashback
+//
+//  Created by 井上　希稟 on 2025/01/29.
+//
+
+
+//
 //  AddStoryViewController.swift
 //  flashback
 //
@@ -8,20 +16,63 @@
 import UIKit
 import PhotosUI
 
-struct Story: Codable{
+struct Event: Codable{
     let text: String
     let imageData: Data
 }
+struct DatePicker<Label> where Label : View
+struct MultiDatePicker<Label> where Label : View
 
-class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
+class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
     
     let addPhotoButton = UIButton()
-    var stories: [Story] = []
+    var events: [Event] = []
     let saveButton = UIButton()
+    let dateButton = UIButton()
     let textview = UITextView()
     let imageView = UIImageView()
+    let datePicker = UIDatePicker()
+    
     var selectedImageData: Data?
     var saveData: UserDefaults = UserDefaults.standard
+    
+    @State var showDatePicker = false
+        @State private var dates: Set<DateComponents> = []
+        
+        var body: some View {
+            VStack {
+                Button {
+                    showDatePicker.toggle()
+                } label: {
+                    Text("カレンダーを表示")
+                    Image(systemName: "calendar")
+                }
+                .buttonStyle(.bordered)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay {
+                ZStack{
+                    if showDatePicker {
+                        Color.black.opacity(0.3)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                showDatePicker = false
+                            }
+                        MultiDatePicker(selection: $dates) {
+                            Text("")
+                        }
+                        .datePickerStyle(.graphical)
+                        .padding()
+                        .background(.white, in: RoundedRectangle(
+                            cornerRadius: 10,
+                            style: .continuous)
+                        )
+                        .padding()
+                    }
+                }
+                .animation(.default, value: showDatePicker)
+            }
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +81,7 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         addPhotoButton.setTitleColor(.black, for: .normal)
         addPhotoButton.setTitleColor(.systemGreen, for: .selected)
         addPhotoButton.frame = CGRect(x:20, y:100, width: 200, height: 40)
-        addPhotoButton.addTarget(self, action: #selector(AddStoryViewController.addphoto), for: .touchUpInside)
+        addPhotoButton.addTarget(self, action: #selector(AddEventViewController.addphoto), for: .touchUpInside)
         self.view.addSubview(addPhotoButton)
         // Do any additional setup after loading the view.
         
@@ -52,9 +103,22 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         saveButton.backgroundColor = .black
         saveButton.layer.cornerRadius = 8.0
         saveButton.frame = CGRect(x: 20, y:500, width: view.frame.width - 40, height: 50)
-        saveButton.addTarget(self, action: #selector(saveStory), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveEvent), for: .touchUpInside)
         view.addSubview(saveButton)
-    }
+        
+        //1/29
+        dateButton.setTitle("日付", for: .normal)
+        dateButton.setTitleColor(.black, for: .normal)
+        dateButton.setTitleColor(.systemGreen, for: .selected)
+        dateButton.frame = CGRect(x: view.frame.width - 220, y:100, width: 200, height: 40)
+        view.addSubview(dateButton)
+        
+        }
+    @objc func dateChanged(_ sender: UIDatePicker) {
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy/MM/dd"
+           print("選択された日付: \(formatter.string(from: sender.date))")
+       } //chatgpt
     @objc func addphoto() {
         var configuration = PHPickerConfiguration()
         
@@ -102,7 +166,8 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    @objc func saveStory() {
+    
+    @objc func saveEvent() {
             guard let text = textview.text, !text.isEmpty else {
                 print("テキストが入力されていません")
                 return
@@ -113,12 +178,12 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
                 return
             }
             
-            let newStory = Story(text: text, imageData: imageData)
-            stories.append(newStory)
+            let newEvent = Event(text: text, imageData: imageData)
+        events.append(newEvent)
             
             do {
                 let encoder = JSONEncoder()
-                let data = try encoder.encode(stories)
+                let data = try encoder.encode(events)
                 saveData.set(data, forKey: "stories")
                 saveData.synchronize()
                 print("ストーリーが保存されました。")
