@@ -13,6 +13,7 @@
 //  Created by 井上　希稟 on 2025/01/24.
 //
 
+
 import UIKit
 import PhotosUI
 
@@ -20,8 +21,7 @@ struct Event: Codable{
     let text: String
     let imageData: Data
 }
-struct DatePicker<Label> where Label : View
-struct MultiDatePicker<Label> where Label : View
+
 
 class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
     
@@ -31,48 +31,24 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
     let dateButton = UIButton()
     let textview = UITextView()
     let imageView = UIImageView()
-    let datePicker = UIDatePicker()
+    
     
     var selectedImageData: Data?
     var saveData: UserDefaults = UserDefaults.standard
     
-    @State var showDatePicker = false
-        @State private var dates: Set<DateComponents> = []
-        
-        var body: some View {
-            VStack {
-                Button {
-                    showDatePicker.toggle()
-                } label: {
-                    Text("カレンダーを表示")
-                    Image(systemName: "calendar")
-                }
-                .buttonStyle(.bordered)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay {
-                ZStack{
-                    if showDatePicker {
-                        Color.black.opacity(0.3)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                showDatePicker = false
-                            }
-                        MultiDatePicker(selection: $dates) {
-                            Text("")
-                        }
-                        .datePickerStyle(.graphical)
-                        .padding()
-                        .background(.white, in: RoundedRectangle(
-                            cornerRadius: 10,
-                            style: .continuous)
-                        )
-                        .padding()
-                    }
-                }
-                .animation(.default, value: showDatePicker)
-            }
-        }
+        public enum UIDatePickerStyle : Int {
+            case automatic = 0
+            case wheels = 1
+            case compact = 2
+
+            @available(iOS 14.0, *)
+            case inline = 3
+    }
+
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    datePicker;.preferredDatePickerStyle() = .inline
+    datePicker;.datePickerMode = .dateAndTime()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,11 +90,6 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         view.addSubview(dateButton)
         
         }
-    @objc func dateChanged(_ sender: UIDatePicker) {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "yyyy/MM/dd"
-           print("選択された日付: \(formatter.string(from: sender.date))")
-       } //chatgpt
     @objc func addphoto() {
         var configuration = PHPickerConfiguration()
         
