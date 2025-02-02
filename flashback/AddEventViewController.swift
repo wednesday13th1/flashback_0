@@ -20,7 +20,7 @@ import PhotosUI
 struct Event: Codable{
     let text: String
     let imageData: Data
-//    let date: Date
+    let pickedDate: Date
 }
 
 
@@ -82,7 +82,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             //UIDate Picker の設定
         datePicker.datePickerMode = .dateAndTime
         if #available(iOS 14.0, *) {
-            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.preferredDatePickerStyle = .compact
         }
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
             
@@ -246,7 +246,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         
         datePickerVC.view.addSubview(picker)
         
-        //Auto Layout設定 (上下中央、)
+        //Auto Layout設定 (上下中央)
         NSLayoutConstraint.activate([
             picker.centerXAnchor.constraint(equalTo: datePickerVC.view.centerXAnchor),
             picker.centerYAnchor.constraint(equalTo: datePickerVC.view.centerYAnchor),
@@ -299,7 +299,9 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
                 return
             }
             
-        let newEvent = Event(text: text, imageData: imageData)
+        let selectedDate = datePicker.date
+        let newEvent = Event(text: text, imageData: imageData, pickedDate: Date)
+        let saveData = UserDefaults.standard
         events.append(newEvent)
             
             do {
@@ -328,5 +330,3 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             present(alert, animated: true, completion: nil)
         }
 }
-
-
