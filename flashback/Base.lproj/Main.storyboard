@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-687" y="669"/>
         </scene>
-        <!--Item-->
+        <!--イベント-->
         <scene sceneID="v7V-fX-2PS">
             <objects>
                 <viewController id="vsW-dC-y5i" customClass="AddEventViewController" customModule="flashback" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,7 +34,7 @@
                         <viewLayoutGuide key="safeArea" id="ghl-TR-vka"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="uZ5-eI-R5o"/>
+                    <tabBarItem key="tabBarItem" title="イベント" image="balloon" catalog="system" id="uZ5-eI-R5o"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldI-7x-rhW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,6 +81,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="balloon" catalog="system" width="77" height="128"/>
         <image name="binoculars" catalog="system" width="128" height="90"/>
         <image name="person.crop.rectangle.badge.plus" catalog="system" width="128" height="97"/>
         <systemColor name="labelColor">

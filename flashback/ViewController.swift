@@ -17,10 +17,14 @@ class ViewController: UIViewController {
     var timer: Timer?
     var saveData: UserDefaults = UserDefaults.standard
     
+    let dateLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         displayedStories = pickRandomStories()
+        
+        dateLabel.text = getDate()
         
         // レイアウトを設定
         let layout = UICollectionViewFlowLayout()
@@ -78,6 +82,12 @@ class ViewController: UIViewController {
         displayedStories = pickRandomStories()
         collectionView.reloadData()
     }
+    func getDate() -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            return formatter.string(from: Date())
+    }
+
 }
 
 

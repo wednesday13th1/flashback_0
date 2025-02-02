@@ -20,6 +20,7 @@ import PhotosUI
 struct Event: Codable{
     let text: String
     let imageData: Data
+//    let date: Date
 }
 
 
@@ -107,7 +108,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             
             //テキストビューの制約
             textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
+            textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textview.heightAnchor.constraint(equalToConstant: 100),
 
@@ -118,7 +119,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             saveButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
             super.traitCollectionDidChange(previousTraitCollection)
             
             if UIDevice.current.orientation.isLandscape {
@@ -298,7 +299,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
                 return
             }
             
-            let newEvent = Event(text: text, imageData: imageData)
+        let newEvent = Event(text: text, imageData: imageData)
         events.append(newEvent)
             
             do {
