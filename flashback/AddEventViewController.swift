@@ -31,24 +31,12 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
     let dateButton = UIButton()
     let textview = UITextView()
     let imageView = UIImageView()
+    let datePicker = UIDatePicker()
     
     
     var selectedImageData: Data?
+    var selectedDate: Date = Date()
     var saveData: UserDefaults = UserDefaults.standard
-    
-        public enum UIDatePickerStyle : Int {
-            case automatic = 0
-            case wheels = 1
-            case compact = 2
-
-            @available(iOS 14.0, *)
-            case inline = 3
-    }
-
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
-    datePicker;.preferredDatePickerStyle() = .inline
-    datePicker;.datePickerMode = .dateAndTime()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,18 +44,18 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         addPhotoButton.setTitle("写真を追加する", for: .normal)
         addPhotoButton.setTitleColor(.black, for: .normal)
         addPhotoButton.setTitleColor(.systemGreen, for: .selected)
-        addPhotoButton.frame = CGRect(x:20, y:100, width: 200, height: 40)
+        addPhotoButton.translatesAutoresizingMaskIntoConstraints = false
         addPhotoButton.addTarget(self, action: #selector(AddEventViewController.addphoto), for: .touchUpInside)
         self.view.addSubview(addPhotoButton)
         // Do any additional setup after loading the view.
         
-        imageView.frame = CGRect(x: 20, y:160, width: view.frame.width - 40, height: 200)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .lightGray
         view.addSubview(imageView)
         
         
-        textview.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 100)
+        textview.translatesAutoresizingMaskIntoConstraints = false
         textview.layer.borderColor = UIColor.gray.cgColor
         textview.layer.borderWidth = 1.0
         textview.layer.cornerRadius = 8.0
@@ -78,7 +66,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .black
         saveButton.layer.cornerRadius = 8.0
-        saveButton.frame = CGRect(x: 20, y:500, width: view.frame.width - 40, height: 50)
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action: #selector(saveEvent), for: .touchUpInside)
         view.addSubview(saveButton)
         
@@ -86,10 +74,126 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         dateButton.setTitle("日付", for: .normal)
         dateButton.setTitleColor(.black, for: .normal)
         dateButton.setTitleColor(.systemGreen, for: .selected)
-        dateButton.frame = CGRect(x: view.frame.width - 220, y:100, width: 200, height: 40)
+        dateButton.translatesAutoresizingMaskIntoConstraints = false
+        dateButton.addTarget(self, action: #selector(showdatePicker), for: .touchUpInside)
         view.addSubview(dateButton)
         
+            //UIDate Picker の設定
+        datePicker.datePickerMode = .dateAndTime
+        if #available(iOS 14.0, *) {
+            datePicker.preferredDatePickerStyle = .wheels
         }
+        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+            
+        //Auto Layout 制約の適用
+        NSLayoutConstraint.activate([
+            //画像ボタンの制約
+            addPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            addPhotoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: 200),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            //日付ボタンの制約
+            dateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            dateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            dateButton.widthAnchor.constraint(equalToConstant: 200),
+            dateButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            //画像viewの制約
+            imageView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            //テキストビューの制約
+            textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
+            textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textview.heightAnchor.constraint(equalToConstant: 100),
+
+            //保存ボタンの制約
+            saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+            super.traitCollectionDidChange(previousTraitCollection)
+            
+            if UIDevice.current.orientation.isLandscape {
+                print("横向きになりました")
+                updateLayoutForLandscape()
+            } else {
+                print("横向きになりました")
+                updateLayoutForPortrait()
+            }
+        }
+        
+        //縦レイアウト更新
+        func updateLayoutForLandscape() {
+            NSLayoutConstraint.deactivate(view.constraints)
+            NSLayoutConstraint.activate([
+                
+                addPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                addPhotoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                addPhotoButton.widthAnchor.constraint(equalToConstant: 150),
+                addPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+                
+                dateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                dateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                dateButton.widthAnchor.constraint(equalToConstant: 150),
+                dateButton.heightAnchor.constraint(equalToConstant: 40),
+                
+                imageView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 20),
+                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.5),
+                imageView.heightAnchor.constraint(equalToConstant: 150),
+                
+                textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+                textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                textview.heightAnchor.constraint(equalToConstant: 150),
+
+                saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
+                saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                saveButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }
+        func updateLayoutForPortrait() {
+            NSLayoutConstraint.deactivate(view.constraints)
+            NSLayoutConstraint.activate([
+                
+                addPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                addPhotoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                addPhotoButton.widthAnchor.constraint(equalToConstant: 200),
+                addPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+                
+                dateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                dateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                dateButton.widthAnchor.constraint(equalToConstant: 200),
+                dateButton.heightAnchor.constraint(equalToConstant: 40),
+                
+                imageView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 20),
+                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                imageView.heightAnchor.constraint(equalToConstant: 200),
+                
+                textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+                textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
+                textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                textview.heightAnchor.constraint(equalToConstant: 100),
+
+                saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
+                saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                saveButton.heightAnchor.constraint(equalToConstant: 50)
+                
+            ])
+        }
+        }
+    
     @objc func addphoto() {
         var configuration = PHPickerConfiguration()
         
@@ -128,6 +232,51 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         }
         dismiss(animated: true)
     }
+    
+    @objc func showdatePicker() {
+        let datePickerVC = UIViewController()
+        datePickerVC.preferredContentSize = CGSize(width: 300, height: 350)
+        
+        let picker = UIDatePicker()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.datePickerMode = .dateAndTime
+        picker.preferredDatePickerStyle = .wheels
+        picker.addTarget(self, action: #selector(dateChanged(_ :)), for: .valueChanged)
+        
+        datePickerVC.view.addSubview(picker)
+        
+        //Auto Layout設定 (上下中央、)
+        NSLayoutConstraint.activate([
+            picker.centerXAnchor.constraint(equalTo: datePickerVC.view.centerXAnchor),
+            picker.centerYAnchor.constraint(equalTo: datePickerVC.view.centerYAnchor),
+            picker.widthAnchor.constraint(equalTo: datePickerVC.view.widthAnchor, multiplier: 0.9),
+            picker.heightAnchor.constraint(equalToConstant: 250)//高さを適切に確保
+        ])
+        
+        let alert = UIAlertController(title: "日付を選択", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
+        datePicker.frame = CGRect(x: 10, y:20, width: alert.view.frame.width - 40, height: 200)
+        alert.view.addSubview(datePicker)
+        
+        let selectAction = UIAlertAction(title: "決定", style: .default) { _ in
+            self.updateDateButtonTitle()
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
+        
+        alert.addAction(selectAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    @objc func dateChanged(_ sender: UIDatePicker){
+        selectedDate = sender.date
+    }
+    private func updateDateButtonTitle() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dateButton.setTitle(formatter.string(from: selectedDate), for: .normal)
+    }
+    
     /*
      // MARK: - Navigation
      
