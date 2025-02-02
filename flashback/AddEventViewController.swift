@@ -79,13 +79,13 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         dateButton.addTarget(self, action: #selector(showdatePicker), for: .touchUpInside)
         view.addSubview(dateButton)
         
-            //UIDate Picker の設定
+        //UIDate Picker の設定
         datePicker.datePickerMode = .dateAndTime
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .compact
         }
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-            
+        
         //Auto Layout 制約の適用
         NSLayoutConstraint.activate([
             //画像ボタンの制約
@@ -111,7 +111,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textview.heightAnchor.constraint(equalToConstant: 100),
-
+            
             //保存ボタンの制約
             saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -155,7 +155,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
                 textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
                 textview.heightAnchor.constraint(equalToConstant: 150),
-
+                
                 saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
                 saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -185,7 +185,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
                 textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
                 textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
                 textview.heightAnchor.constraint(equalToConstant: 100),
-
+                
                 saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
                 saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -193,7 +193,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
                 
             ])
         }
-        }
+    }
     
     @objc func addphoto() {
         var configuration = PHPickerConfiguration()
