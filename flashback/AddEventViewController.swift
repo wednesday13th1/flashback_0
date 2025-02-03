@@ -300,7 +300,8 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             }
             
         let selectedDate = datePicker.date
-        let newEvent = Event(text: text, imageData: imageData, pickedDate: Date)
+        print(selectedDate)
+        let newEvent = Event(text: text, imageData: imageData, pickedDate: selectedDate)
         let saveData = UserDefaults.standard
         events.append(newEvent)
             
