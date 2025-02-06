@@ -246,7 +246,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         
         datePickerVC.view.addSubview(picker)
         
-        //Auto Layout設定 (上下中央)
+        //Auto Layout設定 (上下中央&横幅いっぱい)
         NSLayoutConstraint.activate([
             picker.centerXAnchor.constraint(equalTo: datePickerVC.view.centerXAnchor),
             picker.centerYAnchor.constraint(equalTo: datePickerVC.view.centerYAnchor),
@@ -254,14 +254,14 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
             picker.heightAnchor.constraint(equalToConstant: 250)//高さを適切に確保
         ])
         
-        let alert = UIAlertController(title: "日付を選択", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
-        datePicker.frame = CGRect(x: 10, y:20, width: alert.view.frame.width - 40, height: 200)
-        alert.view.addSubview(datePicker)
+        let alert = UIAlertController(title: "日付を選択", message: nil, preferredStyle: .alert)
+        alert.setValue(datePickerVC, forKey: "contentViewController")
         
         let selectAction = UIAlertAction(title: "決定", style: .default) { _ in
+            self.selectedDate = picker.date
             self.updateDateButtonTitle()
         }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
         alert.addAction(selectAction)
         alert.addAction(cancelAction)
