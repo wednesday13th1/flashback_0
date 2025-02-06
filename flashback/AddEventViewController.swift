@@ -68,7 +68,7 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
         saveButton.backgroundColor = .black
         saveButton.layer.cornerRadius = 8.0
         saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.addTarget(self, action: #selector(saveEvent), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveEventStory), for: .touchUpInside)
         view.addSubview(saveButton)
         
         //1/29
@@ -287,43 +287,49 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    
-    @objc func saveEvent() {
-            guard let text = textview.text, !text.isEmpty else {
-                print("テキストが入力されていません")
-                return
-            }
-            
-            guard let imageData = selectedImageData else {
-                print("画像が選択されていません。")
-                return
-            }
-            
-        let selectedDate = datePicker.date
-        print(selectedDate)
-        let newEvent = Event(text: text, imageData: imageData, pickedDate: selectedDate)
-        let saveData = UserDefaults.standard
-        events.append(newEvent)
-            
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(events)
-                saveData.set(data, forKey: "stories")
-                saveData.synchronize()
-                print("ストーリーが保存されました。")
-                
-                // アラートを表示する
-                showSaveAlert()
-                
-            } catch {
-                print("ストーリーの保存に失敗しました。", error)
-            }
-            
-            // 入力フィールドをリセット
-            textview.text = ""
-            imageView.image = nil
-            selectedImageData = nil
-        }
+//    
+//    @objc func saveEvent() {
+//            guard let text = textview.text, !text.isEmpty else {
+//                print("テキストが入力されていません")
+//                return
+//            }
+//            
+//            guard let imageData = selectedImageData else {
+//                print("画像が選択されていません。")
+//                return
+//            }
+//            
+//        let selectedDate = datePicker.date
+//        print(selectedDate)
+//        let newEvent = Event(text: text, imageData: imageData, pickedDate: selectedDate)
+//        let saveData = UserDefaults.standard
+//        events.append(newEvent)
+//            
+//            do {
+//                let encoder = JSONEncoder()
+//                let data = try encoder.encode(events)
+//                saveData.set(data, forKey: "stories")
+//                saveData.synchronize()
+//                print("ストーリーが保存されました。")
+//                
+//                // アラートを表示する
+//                showSaveAlert()
+//                
+//            } catch {
+//                print("ストーリーの保存に失敗しました。", error)
+//            }
+//            
+//            // 入力フィールドをリセット
+//            textview.text = ""
+//            imageView.image = nil
+//            selectedImageData = nil
+//        }
+    @IBAction func saveEventStory() {
+        let selectedImage = UIImage(named: "eventImage")
+        let storyText = "This is an event story."
+
+        RealmManager.shared.saveStory(image: selectedImage, text: storyText, type: "event")
+    }
 
         private func showSaveAlert() {
             let alert = UIAlertController(title: "保存完了", message: "ストーリーが保存されました！", preferredStyle: .alert)

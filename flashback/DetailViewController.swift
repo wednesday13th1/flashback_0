@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
         setupUI()
         
         if let story = story {
-            imageView.image = UIImage(data: story.imageData)
+            imageView.image = UIImage(data: story.imageData!)
             textlabel.text = story.text
         }        // Do any additional setup after loading the view.
     }

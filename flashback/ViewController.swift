@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import RealmSwift
 
 class ViewController: UIViewController {
     
@@ -32,7 +33,7 @@ class ViewController: UIViewController {
         
         displayedStories = pickRandomStories()
         
-        // UserDefaultsに保存された日付があれば表示、なければ現在の日付を表示
+        //UserDefaultsに保存された日付があれば表示、なければ現在の日付を表示
         if let savedDate = saveData.string(forKey: "selectedDate") {
             dateLabel.text = savedDate
         } else {
@@ -181,16 +182,14 @@ class ViewController: UIViewController {
     }
         
     func pickRandomStories() -> [Story] {
-        // 全ての画像からランダムに2つ選択
-        guard let savedData = saveData.data(forKey: "stories") else { return [] }
-        do {
-            let decoder = JSONDecoder()
-            let stories = try decoder.decode([Story].self, from: savedData)
-            return Array(stories.shuffled().prefix(2))
-        } catch {
-            print("デコードに失敗しました")
-            return []
-        }
+        let realm = try! Realm()  // Realmインスタンスを取得
+        let stories = realm.objects(Story.self) // 全てのStoryを取得
+        
+        // ストーリーが2つ未満なら、そのまま返す
+        guard stories.count >= 2 else { return Array(stories) }
+
+        // シャッフルして2つだけ取得
+        return Array(stories.shuffled().prefix(2))
     }
         
     func updateDisplayedImages() {
@@ -224,20 +223,27 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         
         //ストーリーをとってくる処理
         let story = displayedStories[indexPath.item]
-        detailImageView.image = UIImage(data: story.imageData)
+        detailImageView.image = UIImage(data: story.imageData!)
         detailCommentLabel.text = story.text
         
         
         //イベントをとってくる処理
         do {
-             let data = saveData.data(forKey: "stories")!
-            print(data)
-             let decodedEventData = try JSONDecoder().decode(Event.self, from: data)
-            print(decodedEventData)
-//            detailDateLabel.text = decodedEventData[indexPath.item].pickedDate
-
+            let data = saveData.data(forKey: "stories")!
+            // Event型の配列としてデコード
+            let decodedEvents = try JSONDecoder().decode([Event].self, from: data)
+            // indexPath.item に対応するイベントを取得
+            let event = decodedEvents[indexPath.item]
+            
+            // 日付を文字列に変換するためのフォーマッターを用意
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let dateString = formatter.string(from: event.pickedDate)
+            
+            // detailDateLabelに設定
+            detailDateLabel.text = dateString
         } catch {
-             print("データ修得に失敗しました", error)
+            print("データ取得に失敗しました", error)
         }
         
         if let savedDate = saveData.string(forKey: "selectedDate") {
@@ -305,7 +311,7 @@ class ImageCell: UICollectionViewCell {
     }
     
     func configure(with story: Story) {
-        imageView.image = UIImage(data: story.imageData)
+        imageView.image = UIImage(data: story.imageData!)
         textLabel.text = story.text
     }
 }

@@ -8,10 +8,10 @@
 import UIKit
 import PhotosUI
 
-struct Story: Codable{
-    let text: String
-    let imageData: Data
-}
+//struct Story: Codable{
+//    let text: String
+//    let imageData: Data
+//}
 
 class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
     
@@ -29,18 +29,18 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         addPhotoButton.setTitle("写真を追加する", for: .normal)
         addPhotoButton.setTitleColor(.black, for: .normal)
         addPhotoButton.setTitleColor(.systemGreen, for: .selected)
-        addPhotoButton.frame = CGRect(x:20, y:100, width: 200, height: 40)
+//        addPhotoButton.frame = CGRect(x:20, y:100, width: 200, height: 40)
         addPhotoButton.addTarget(self, action: #selector(AddStoryViewController.addphoto), for: .touchUpInside)
         self.view.addSubview(addPhotoButton)
         // Do any additional setup after loading the view.
         
-        imageView.frame = CGRect(x: 20, y:160, width: view.frame.width - 40, height: 200)
+//        imageView.frame = CGRect(x: 20, y:160, width: view.frame.width - 40, height: 200)
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .lightGray
         view.addSubview(imageView)
         
         
-        textview.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 100)
+//        textview.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 100)
         textview.layer.borderColor = UIColor.gray.cgColor
         textview.layer.borderWidth = 1.0
         textview.layer.cornerRadius = 8.0
@@ -51,9 +51,74 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .black
         saveButton.layer.cornerRadius = 8.0
-        saveButton.frame = CGRect(x: 20, y:500, width: view.frame.width - 40, height: 50)
-        saveButton.addTarget(self, action: #selector(saveStory), for: .touchUpInside)
+//        saveButton.frame = CGRect(x: 20, y:500, width: view.frame.width - 40, height: 50)
+        saveButton.addTarget(self, action: #selector(savePhotoStory), for: .touchUpInside)
         view.addSubview(saveButton)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("横向きになりました")
+            updateLayoutForLandscape()
+        } else {
+            print("横向きになりました")
+            updateLayoutForPortrait()
+        }
+    }
+    
+    //縦レイアウト更新
+    func updateLayoutForLandscape() {
+        NSLayoutConstraint.deactivate(view.constraints)
+        NSLayoutConstraint.activate([
+            
+            addPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            addPhotoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: 150),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            imageView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.5),
+            imageView.heightAnchor.constraint(equalToConstant: 150),
+            
+            textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textview.heightAnchor.constraint(equalToConstant: 150),
+            
+            saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    func updateLayoutForPortrait() {
+        NSLayoutConstraint.deactivate(view.constraints)
+        NSLayoutConstraint.activate([
+            
+            addPhotoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            addPhotoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: 200),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            imageView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            textview.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            textview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
+            textview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textview.heightAnchor.constraint(equalToConstant: 100),
+            
+            saveButton.topAnchor.constraint(equalTo: textview.bottomAnchor, constant: 20),
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.heightAnchor.constraint(equalToConstant: 50)
+            
+        ])
     }
     @objc func addphoto() {
         var configuration = PHPickerConfiguration()
@@ -102,39 +167,45 @@ class AddStoryViewController: UIViewController, PHPickerViewControllerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
-    @objc func saveStory() {
-            guard let text = textview.text, !text.isEmpty else {
-                print("テキストが入力されていません")
-                return
-            }
-            
-            guard let imageData = selectedImageData else {
-                print("画像が選択されていません。")
-                return
-            }
-            
-            let newStory = Story(text: text, imageData: imageData)
-            stories.append(newStory)
-            
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(stories)
-                saveData.set(data, forKey: "stories")
-                saveData.synchronize()
-                print("ストーリーが保存されました。")
-                
-                // アラートを表示する
-                showSaveAlert()
-                
-            } catch {
-                print("ストーリーの保存に失敗しました。", error)
-            }
-            
-            // 入力フィールドをリセット
-            textview.text = ""
-            imageView.image = nil
-            selectedImageData = nil
-        }
+//    @objc func saveStory() {
+//            guard let text = textview.text, !text.isEmpty else {
+//                print("テキストが入力されていません")
+//                return
+//            }
+//            
+//            guard let imageData = selectedImageData else {
+//                print("画像が選択されていません。")
+//                return
+//            }
+//            
+//            let newStory = Story(text: text, imageData: imageData)
+//            stories.append(newStory)
+//            
+//            do {
+//                let encoder = JSONEncoder()
+//                let data = try encoder.encode(stories)
+//                saveData.set(data, forKey: "stories")
+//                saveData.synchronize()
+//                print("ストーリーが保存されました。")
+//                
+//                // アラートを表示する
+//                showSaveAlert()
+//                
+//            } catch {
+//                print("ストーリーの保存に失敗しました。", error)
+//            }
+//            
+//            // 入力フィールドをリセット
+//            textview.text = ""
+//            imageView.image = nil
+//            selectedImageData = nil
+//        }
+    @IBAction func savePhotoStory() {
+        let selectedImage = UIImage(named: "samplePhoto")
+        let storyText = "This is a photo story."
+
+        RealmManager.shared.saveStory(image: selectedImage, text: storyText, type: "photo")
+    }
 
         private func showSaveAlert() {
             let alert = UIAlertController(title: "保存完了", message: "ストーリーが保存されました！", preferredStyle: .alert)
