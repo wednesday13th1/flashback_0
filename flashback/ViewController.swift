@@ -3,7 +3,7 @@
 //  flashback
 //
 //  Created by 井上　希稟 on 2025/01/08.
-
+//
 
 import UIKit
 import PhotosUI
@@ -212,7 +212,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Image", for: indexPath) as! ImageCell
         cell.configure(with: displayedStories[indexPath.item])
         return cell
     }
@@ -228,90 +228,93 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         
         
         //イベントをとってくる処理
-        do {
-            let data = saveData.data(forKey: "stories")!
-            // Event型の配列としてデコード
-            let decodedEvents = try JSONDecoder().decode([Event].self, from: data)
-            // indexPath.item に対応するイベントを取得
-            let event = decodedEvents[indexPath.item]
-            
-            // 日付を文字列に変換するためのフォーマッターを用意
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd HH:mm"
-            let dateString = formatter.string(from: event.pickedDate)
-            
-            // detailDateLabelに設定
-            detailDateLabel.text = dateString
-        } catch {
-            print("データ取得に失敗しました", error)
-        }
+        //        do {
+        //            let data = saveData.data(forKey: "stories")!
+        //            // Event型の配列としてデコード
+        //            let decodedEvents = try JSONDecoder().decode([Event].self, from: data)
+        //            // indexPath.item に対応するイベントを取得
+        //            let event = decodedEvents[indexPath.item]
+        //
+        //            // 日付を文字列に変換するためのフォーマッターを用意
+        //            let formatter = DateFormatter()
+        //            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        //            let dateString = formatter.string(from: event.pickedDate)
+        //
+        //            // detailDateLabelに設定
+        //            detailDateLabel.text = dateString
+        //        } catch {
+        //            print("データ取得に失敗しました", error)
+        //        }
+        //
+        //        if let savedDate = saveData.string(forKey: "selectedDate") {
+        //            detailDateLabel.text = savedDate
+        //        } else {
+        //            detailDateLabel.text = getDate()
+        //        }
+        //        detailContainerView.isHidden = false
+        //    }
+        //}
         
-        if let savedDate = saveData.string(forKey: "selectedDate") {
-            detailDateLabel.text = savedDate
-        } else {
-            detailDateLabel.text = getDate()
+        // MARK: - カスタムセル
+        class ImageCell: UICollectionViewCell {
+            private let imageView: UIImageView = {
+                let imageView = UIImageView()
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                return imageView
+            }()
+            private let textLabel: UILabel = {
+                let label = UILabel()
+                label.textAlignment = .center
+                label.font = UIFont.systemFont(ofSize: 14)
+                label.numberOfLines = 2
+                return label
+            }()
+            private let dateLabel: UILabel = {
+                let label = UILabel()
+                label.textAlignment = .center
+                label.font = UIFont.systemFont(ofSize: 14)
+                label.numberOfLines = 2
+                return label
+            }()
+            
+            override init(frame: CGRect) {
+                super.init(frame: frame)
+                
+                contentView.addSubview(imageView)
+                contentView.addSubview(textLabel)
+                contentView.addSubview(dateLabel)
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                textLabel.translatesAutoresizingMaskIntoConstraints = false
+                dateLabel.translatesAutoresizingMaskIntoConstraints = false
+                
+                NSLayoutConstraint.activate([
+                    imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                    imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                    imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                    imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    
+                    textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
+                    textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                    textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                    
+                    dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10),
+                    dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                    dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+                ])
+            }
+            
+            required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+            }
+            
+            func configure(with story: Story) {
+                imageView.image = UIImage(data: story.imageData!)
+                textLabel.text = story.text
+            }
         }
-        detailContainerView.isHidden = false
     }
 }
-    
-// MARK: - カスタムセル
-class ImageCell: UICollectionViewCell {
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    private let textLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 2
-        return label
-    }()
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        contentView.addSubview(imageView)
-        contentView.addSubview(textLabel)
-        contentView.addSubview(dateLabel)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
-            textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            dateLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(with story: Story) {
-        imageView.image = UIImage(data: story.imageData!)
-        textLabel.text = story.text
-    }
-}
+

@@ -16,18 +16,18 @@
 
 import UIKit
 import PhotosUI
+import RealmSwift
 
-struct Event: Codable{
-    let text: String
-    let imageData: Data
-    let pickedDate: Date
-}
+//struct Event: Codable{
+//    let text: String
+//    let imageData: Data
+//    let pickedDate: Date
+//}
 
 
 class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
     
     let addPhotoButton = UIButton()
-    var events: [Event] = []
     let saveButton = UIButton()
     let dateButton = UIButton()
     let textview = UITextView()
@@ -288,42 +288,8 @@ class AddEventViewController: UIViewController, PHPickerViewControllerDelegate {
      }
      */
 //    
-//    @objc func saveEvent() {
-//            guard let text = textview.text, !text.isEmpty else {
-//                print("テキストが入力されていません")
-//                return
-//            }
-//            
-//            guard let imageData = selectedImageData else {
-//                print("画像が選択されていません。")
-//                return
-//            }
-//            
-//        let selectedDate = datePicker.date
-//        print(selectedDate)
-//        let newEvent = Event(text: text, imageData: imageData, pickedDate: selectedDate)
-//        let saveData = UserDefaults.standard
-//        events.append(newEvent)
-//            
-//            do {
-//                let encoder = JSONEncoder()
-//                let data = try encoder.encode(events)
-//                saveData.set(data, forKey: "stories")
-//                saveData.synchronize()
-//                print("ストーリーが保存されました。")
-//                
-//                // アラートを表示する
-//                showSaveAlert()
-//                
-//            } catch {
-//                print("ストーリーの保存に失敗しました。", error)
-//            }
-//            
-//            // 入力フィールドをリセット
-//            textview.text = ""
-//            imageView.image = nil
-//            selectedImageData = nil
-//        }
+//
+
     @IBAction func saveEventStory() {
         let selectedImage = UIImage(named: "eventImage")
         let storyText = "This is an event story."
